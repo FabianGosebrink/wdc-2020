@@ -1,0 +1,5 @@
+<pre *ngIf="todo$ | async as todo; else loading">
+  {{ todo | json }}
+</pre>
+
+<ng-template #loading>Loading...</ng-template>
