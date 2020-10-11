@@ -5,7 +5,8 @@
   </p>
   <p>
     <app-todo-list
-      [items]="items"
+      [items]="items$ | async"
+      [doneItems]="doneItems$ | async"
       (markAsDone)="markAsDone($event)"
     ></app-todo-list>
   </p>

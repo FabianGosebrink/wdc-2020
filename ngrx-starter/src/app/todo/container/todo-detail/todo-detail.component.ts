@@ -1,25 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Todo } from '../../../models/todo'; 
-import { ActivatedRoute } from '@angular/router'; 
-import { TodoService } from '../../../core/services/todo.service'; 
+import { Todo } from '../../../models/todo';
+import * as todoActions from '../../store/todo.actions';
+import * as fromSelectors from '../../store/todo.selectors';
 
 @Component({
   selector: 'app-todo-detail',
   templateUrl: './todo-detail.component.html',
-  styleUrls: ['./todo-detail.component.css']
+  styleUrls: ['./todo-detail.component.css'],
 })
 export class TodoDetailComponent implements OnInit {
-
   todo$: Observable<Todo>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private todoService: TodoService
-  ) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.params.id;
-    this.todo$ = this.todoService.getItem(id);
+    this.todo$ = this.store.pipe(select(fromSelectors.getSelectedItem));
+
+    this.store.dispatch(todoActions.loadSingleTodo());
   }
 }
