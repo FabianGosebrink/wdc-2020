@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Todo } from '../../../models/todo'; 
-import { ActivatedRoute } from '@angular/router'; 
-import { TodoService } from '../../../core/services/todo.service'; 
+import { TodoService } from '../../../core/services/todo.service';
+import { Todo } from '../../../models/todo';
 
 @Component({
   selector: 'app-todo-detail',
   templateUrl: './todo-detail.component.html',
-  styleUrls: ['./todo-detail.component.css']
+  styleUrls: ['./todo-detail.component.css'],
 })
 export class TodoDetailComponent implements OnInit {
-
   todo$: Observable<Todo>;
 
   constructor(
